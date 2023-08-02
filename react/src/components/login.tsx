@@ -1,15 +1,28 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import "./login.css";
+import { useNavigate } from "react-router-dom";
 
 
 const LoginForm=() =>{
 
-    const [popupStyle, showPopup] = useState("hide")
+    // const [popupStyle, showPopup] = useState("hide")
 
     const popup = () =>{
-        showPopup("login-popup")
-        setTimeout(() => showPopup("hide"), 3000)
+        localStorage.setItem('login', true);
+        navigate('/')
+
+        // showPopup("login-popup")
+        // setTimeout(() => showPopup("hide"), 3000)
     }
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let login = localStorage.getItem('login');
+
+        if (login) {
+            navigate('/')
+        }
+    })
  
     return (
         <>
@@ -22,14 +35,14 @@ const LoginForm=() =>{
                 Login
             </div>
 
-            <div className={popupStyle}>
+            {/* <div className={popupStyle}>
                 <h3>
                     Login Failed !
                 </h3>
                 <p>
                     UserName or Password incorrect !
                 </p>
-            </div>
+            </div> */}
         </div>
         </>
     )
