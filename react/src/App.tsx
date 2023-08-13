@@ -14,7 +14,6 @@ function App() {
       <BrowserRouter>
       <NavBar />
         <Routes>
-
           <Route path="/" element={<Protected Component={Home} />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/about" element={<Protected Component={About} />} />

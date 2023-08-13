@@ -10,14 +10,11 @@ const LoginForm=() =>{
     const popup = () =>{
         localStorage.setItem('login', true);
         navigate('/')
-
-        // showPopup("login-popup")
-        // setTimeout(() => showPopup("hide"), 3000)
     }
     const navigate = useNavigate();
 
     useEffect(() => {
-        let login = localStorage.getItem('login');
+        const login = localStorage.getItem('login');
 
         if (login) {
             navigate('/')
