@@ -8,11 +8,10 @@ import LoginForm from "./components/login";
 import Protected from "./components/protected";
 
 function App() {
-
   return (
     <>
       <BrowserRouter>
-      <NavBar />
+        <NavBar />
         <Routes>
           <Route path="/" element={<Protected Component={Home} />} />
           <Route path="/login" element={<LoginForm />} />

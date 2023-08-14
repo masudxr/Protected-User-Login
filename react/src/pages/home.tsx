@@ -5,17 +5,17 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    sessionStorage.setItem('login', false);
-    localStorage.removeItem('login');
+    sessionStorage.setItem("login", false);
+    localStorage.removeItem("login");
     navigate("/login");
-  }
+  };
   useEffect(() => {
-    const login = localStorage.getItem('login');
+    const login = localStorage.getItem("login");
 
     if (!login) {
-        navigate('/login')
+      navigate("/login");
     }
-})
+  });
 
   return (
     <>
@@ -27,4 +27,3 @@ const Home = () => {
   );
 };
 export default Home;
-

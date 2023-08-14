@@ -18,7 +18,7 @@ const Contact = () => {
   });
   return (
     <>
-      <h1>This is Our Contact page</h1>
+      <h1>Hi, I'm Contact page</h1>
 
       <button type="button" onClick={handleLogOut}>
         LogOut

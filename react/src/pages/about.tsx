@@ -18,7 +18,7 @@ const About = () => {
   });
   return (
     <>
-      <h1>This is Our About page</h1>
+      <h1>Hi, I'm About page</h1>
 
       <button type="button" onClick={handleLogOut}>
         LogOut

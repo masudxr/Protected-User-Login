@@ -1,38 +1,81 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 
+const LoginForm = () => {
+  // const [popupStyle, showPopup] = useState("hide")
+  const [userName, setUserName] = useState(null);
+  const [password, setPassword] = useState(null);
 
-const LoginForm=() =>{
-
-    // const [popupStyle, showPopup] = useState("hide")
-
-    const popup = () =>{
-        localStorage.setItem('login', true);
-        navigate('/')
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleInputChange = (e: any) => {
+    const { id, value } = e.target;
+    if (id === "userName") {
+      setUserName(value);
     }
-    const navigate = useNavigate();
+    if (id === "password") {
+      setPassword(value);
+    }
+  };
 
-    useEffect(() => {
-        const login = localStorage.getItem('login');
+  async function popup() {
+    const json = {
+      name: userName,
+      password: password,
+    };
+    console.log("json", json);
 
-        if (login) {
-            navigate('/')
-        }
-    })
- 
-    return (
-        <>
-        <div className="cover">
-            <h1>Login</h1>
-            <input type="text" placeholder="UserName" />
-            <input type="password" placeholder="password" />
+    const res = await fetch("http://localhost:3000/auth/user/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(json),
+    });
+    const token = await res.json();
+    console.log("token:", token);
+    console.log("token and token:", token.access_token);
 
-            <div className="login-btn" onClick={popup}>
-                Login
-            </div>
+    if (token.access_token) {
+      localStorage.setItem("login", true);
+      navigate("/");
+    }
 
-            {/* <div className={popupStyle}>
+    // localStorage.setItem("login", true);
+    // navigate("/");
+  }
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const login = localStorage.getItem("login");
+
+    if (login) {
+      navigate("/");
+    }
+  });
+
+  return (
+    <>
+      <div className="cover">
+        <h1>Login</h1>
+        <input
+          // value={userName}
+          type="text"
+          onChange={(e) => handleInputChange(e)}
+          id="userName"
+          placeholder="UserName"
+        />
+        <input
+          type="password"
+          id="password"
+          // value={password}
+          onChange={(e) => handleInputChange(e)}
+          placeholder="password"
+        />
+
+        <button type="submit" className="login-btn" onClick={popup}>
+          Login
+        </button>
+
+        {/* <div className={popupStyle}>
                 <h3>
                     Login Failed !
                 </h3>
@@ -40,10 +83,9 @@ const LoginForm=() =>{
                     UserName or Password incorrect !
                 </p>
             </div> */}
-        </div>
-        </>
-    )
+      </div>
+    </>
+  );
+};
 
-}
-
-export default LoginForm
+export default LoginForm;
