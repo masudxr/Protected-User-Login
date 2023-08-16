@@ -3,7 +3,7 @@ import "./login.css";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  // const [popupStyle, showPopup] = useState("hide")
+  // const [popupStyle, showPopup] = useState("hide");
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
 
@@ -31,11 +31,9 @@ const LoginForm = () => {
       body: JSON.stringify(json),
     });
     const token = await res.json();
-    console.log("token:", token);
-    console.log("token and token:", token.access_token);
 
     if (token.access_token) {
-      localStorage.setItem("login", true);
+      localStorage.setItem("login", token.access_token);
       navigate("/");
     }
 
@@ -56,6 +54,7 @@ const LoginForm = () => {
     <>
       <div className="cover">
         <h1>Login</h1>
+
         <input
           type="text"
           onChange={(e) => handleInputChange(e)}
@@ -74,13 +73,9 @@ const LoginForm = () => {
         </button>
 
         {/* <div className={popupStyle}>
-                <h3>
-                    Login Failed !
-                </h3>
-                <p>
-                    UserName or Password incorrect !
-                </p>
-            </div> */}
+          <h3>Login Failed !</h3>
+          <p>UserName or Password incorrect !</p>
+        </div> */}
       </div>
     </>
   );
