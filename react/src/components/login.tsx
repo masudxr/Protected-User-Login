@@ -6,6 +6,7 @@ const LoginForm = () => {
   // const [popupStyle, showPopup] = useState("hide");
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
+  const [logToken, setToken] = useState('')
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleInputChange = (e: any) => {
@@ -33,18 +34,15 @@ const LoginForm = () => {
     const token = await res.json();
 
     if (token.access_token) {
-      localStorage.setItem("login", token.access_token);
+      localStorage.setItem("isLogged", JSON.stringify(token.access_token));
+      setToken(JSON.stringify(token.access_token));
       navigate("/");
     }
-
-    // localStorage.setItem("login", true);
-    // navigate("/");
   }
   const navigate = useNavigate();
 
   useEffect(() => {
-    const login = localStorage.getItem("login");
-
+    const login = localStorage.getItem(logToken);
     if (login) {
       navigate("/");
     }
@@ -71,11 +69,6 @@ const LoginForm = () => {
         <button type="submit" className="login-btn" onClick={popup}>
           Login
         </button>
-
-        {/* <div className={popupStyle}>
-          <h3>Login Failed !</h3>
-          <p>UserName or Password incorrect !</p>
-        </div> */}
       </div>
     </>
   );

@@ -5,12 +5,12 @@ const LogOut = () => {
 
   const navigate = useNavigate();
   
-  sessionStorage.setItem("login", false);
-  localStorage.removeItem("login");
+  sessionStorage.setItem("isLogged", '');
+  localStorage.removeItem("isLogged");
   navigate("/login");
 
   useEffect(() => {
-    const login = localStorage.getItem("login");
+    const login = localStorage.getItem("isLogged");
 
     if (!login) {
       navigate("/login");
