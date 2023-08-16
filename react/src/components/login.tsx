@@ -57,7 +57,6 @@ const LoginForm = () => {
       <div className="cover">
         <h1>Login</h1>
         <input
-          // value={userName}
           type="text"
           onChange={(e) => handleInputChange(e)}
           id="userName"
@@ -66,7 +65,6 @@ const LoginForm = () => {
         <input
           type="password"
           id="password"
-          // value={password}
           onChange={(e) => handleInputChange(e)}
           placeholder="password"
         />
