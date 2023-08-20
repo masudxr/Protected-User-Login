@@ -5,16 +5,24 @@ import { useNavigate } from "react-router-dom";
 const Protected = (props: { Component: any }) => {
   const { Component } = props;
   const navigate = useNavigate();
+  const token = localStorage.getItem("isLogged");
 
   useEffect(() => {
-    const login = localStorage.getItem('isLogged');
-    console.log('login info', login);
+    getUSerProfile();
+  }, []);
 
-    if (!login) {
+  async function getUSerProfile() {
+    const response = await fetch(`http://localhost:3000/auth/user/profile`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    const json = await response.json();
+
+    if (!json.name) {
       navigate("/login");
     }
-  });
-
+  }
   return (
     <>
       <Component />

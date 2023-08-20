@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
+// import App from "../App";
 
 const LoginForm = () => {
   // const [popupStyle, showPopup] = useState("hide");
@@ -24,7 +25,7 @@ const LoginForm = () => {
       name: userName,
       password: password,
     };
-    console.log("json", json);
+    // console.log("create json", json);
 
     const res = await fetch("http://localhost:3000/auth/user/login", {
       method: "POST",
@@ -34,10 +35,12 @@ const LoginForm = () => {
     const token = await res.json();
 
     if (token.access_token) {
-      localStorage.setItem("isLogged", JSON.stringify(token.access_token));
-      setToken(JSON.stringify(token.access_token));
+      localStorage.setItem("isLogged", token.access_token);
+      setToken(token.access_token);
       navigate("/");
     }
+    console.log('Welcome, ', userName)
+    // <App name={userName} />
   }
   const navigate = useNavigate();
 
