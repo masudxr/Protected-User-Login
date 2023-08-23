@@ -9,14 +9,11 @@ import LogOut from "./pages/Logout";
 import Account from "./pages/account";
 
 function App() {
-
-
   return (
     <>
       <BrowserRouter>
-        {/* <NavBar /> */}
         <Routes>
-          <Route path="/" element={<Protected Component={Home}/>} />
+          <Route path="/" element={<Protected Component={Home} />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/about" element={<Protected Component={About} />} />
           <Route path="/contact" element={<Protected Component={Contact} />} />

@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
-// import App from "../App";
 
 const LoginForm = () => {
-  // const [popupStyle, showPopup] = useState("hide");
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
-  const [logToken, setToken] = useState('')
+  const [logToken, setToken] = useState("");
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleInputChange = (e: any) => {
@@ -25,7 +23,6 @@ const LoginForm = () => {
       name: userName,
       password: password,
     };
-    // console.log("create json", json);
 
     const res = await fetch("http://localhost:3000/auth/user/login", {
       method: "POST",
@@ -39,8 +36,7 @@ const LoginForm = () => {
       setToken(token.access_token);
       navigate("/");
     }
-    console.log('Welcome, ', userName)
-    // <App name={userName} />
+    console.log("Welcome, ", userName);
   }
   const navigate = useNavigate();
 
@@ -55,7 +51,6 @@ const LoginForm = () => {
     <>
       <div className="cover">
         <h1>Login</h1>
-
         <input
           type="text"
           onChange={(e) => handleInputChange(e)}
@@ -68,7 +63,6 @@ const LoginForm = () => {
           onChange={(e) => handleInputChange(e)}
           placeholder="password"
         />
-
         <button type="submit" className="login-btn" onClick={popup}>
           Login
         </button>
